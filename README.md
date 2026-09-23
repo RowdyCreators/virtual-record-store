@@ -2,16 +2,6 @@
 
 A small FastAPI starter managed with [uv](https://docs.astral.sh/uv/).
 
-## Create a project
-
-Create a repository from this template, clone it, and run:
-
-```bash
-./scripts/bootstrap.sh my-project
-```
-
-The project name defaults to the current directory name when you omit the argument. The script renames the project and resolves current versions of the runtime and development dependencies.
-
 ## Work on the project
 
 ```bash
