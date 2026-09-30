@@ -1,6 +1,6 @@
 # Virtual Record Store
 
-A FastAPI starting point for a virtual record store. The repository currently contains a server-rendered root page and placeholders for the API, models, services, and database code. Record browsing, accounts, and persistence are not implemented yet.
+A FastAPI starting point for a virtual record store. The repository currently contains a server-rendered root page, two example API routes, and placeholders for models, services, and database code. Record browsing, accounts, and persistence are not implemented yet.
 
 ## Getting started
 
@@ -25,26 +25,27 @@ The project requires Python 3.14 or newer. `just sync` runs `uv sync`, which dow
 
 | Command | Purpose |
 | --- | --- |
-| `just test` | Run pytest (currently exits with code 5 because no tests exist yet) |
+| `just test` | Run pytest |
 | `just lint` | Check code with Ruff |
 | `just format` | Format code with Ruff |
 | `just typecheck` | Run basedpyright |
 | `just check` | Run lint, type checking, tests, and a formatting check |
 
-Dependencies are managed in `pyproject.toml` and locked in `uv.lock`. Add runtime packages with `uv add <package>` or development tools with `uv add --dev <package>`. CI runs formatting, lint, tests, and type checks on pushes and pull requests to `main`. Until tests are added, `just check` and CI also fail at the test step.
+Dependencies are managed in `pyproject.toml` and locked in `uv.lock`. Add runtime packages with `uv add <package>` or development tools with `uv add --dev <package>`. CI runs formatting, lint, tests, and type checks on pushes and pull requests to `main`.
 
 ## Project layout
 
 ```text
 app/
-  main.py              FastAPI app and root route
+  main.py              FastAPI app, root route, and example API routes
   templates/index.html Empty HTML page returned at /
   api/v1/user.py       Placeholder for user routes
   core/                Placeholders for configuration and logging
   db/schema.py         Placeholder for database schema
   models/user.py       Placeholder for user models
   services/user_service.py  Placeholder for user logic
-tests/                 Empty test placeholders
+tests/                 Example API tests
 justfile               Development commands
 pyproject.toml         Python requirements and dependencies
+pyrightconfig.json    Basedpyright virtual environment settings
 ```
