@@ -12,3 +12,13 @@ def main(request: Request):
         name="index.html",
         context={},
     )
+
+
+@app.get("/api/test")
+def get_test() -> dict[str, str]:
+    return {"message": "Hello from GET!"}
+
+
+@app.post("/api/greet")
+def greet(name: str) -> dict[str, str]:
+    return {"message": f"Hello, {name}!"}
