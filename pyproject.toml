@@ -1,6 +1,9 @@
 [project]
-name = "fastapi-template"
+name = "virtual-record-store"
 version = "0.1.0"
+authors = [
+    { name = "Simon Teague" },
+]
 requires-python = ">=3.14"
 dependencies = [
     "fastapi[standard]>=0.141.1",
