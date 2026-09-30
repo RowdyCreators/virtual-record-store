@@ -28,3 +28,4 @@ typecheck:
 # Check formatting, linting, typechecks, and test suite
 check: lint typecheck test
     uv run ruff format --check .
+    echo "All checks passed!"
