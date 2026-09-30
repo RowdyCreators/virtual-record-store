@@ -8,8 +8,13 @@ from app.main import app
 client = TestClient(app)
 
 
-def test_root() -> None:
-    response = cast(Response, client.get("/"))  # pyright: ignore[reportUnknownMemberType]
-
+def test_get() -> None:
+    response = cast(Response, client.get("/api/test"))  # pyright: ignore[reportUnknownMemberType]
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello World"}
+    assert response.json() == {"message": "Hello from GET!"}
+
+
+def test_post() -> None:
+    response = cast(Response, client.post("/api/greet", params={"name": "Neil"}))  # pyright: ignore[reportUnknownMemberType]
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello, Neil!"}

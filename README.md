@@ -1,38 +1,51 @@
-# FastAPI project template
+# Virtual Record Store
 
-A small FastAPI starter managed with [uv](https://docs.astral.sh/uv/).
+A FastAPI starting point for a virtual record store. The repository currently contains a server-rendered root page, two example API routes, and placeholders for models, services, and database code. Record browsing, accounts, and persistence are not implemented yet.
 
-## Work on the project
+## Getting started
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [just](https://just.systems/man/en/packages.html).
 
 ```bash
-just sync       # install dependencies
-just dev        # start the development server
-just check      # run formatting checks, linting, type checks, and tests
+git clone https://github.com/RowdyCreators/virtual-record-store.git
+cd virtual-record-store
+just sync
+just dev
 ```
 
-The API runs at <http://localhost:8000>. Interactive documentation is at <http://localhost:8000/docs>.
+Open <http://localhost:8000/> to see the current page. FastAPI's interactive API documentation is at <http://localhost:8000/docs>.
 
-## Project structure
+For development, run `just dev` or `uv run fastapi dev`. For production, run `just prod` or `uv run fastapi run`.
 
-- `app/main.py`: FastAPI application entry point
-- `app/api/`: route modules
-- `app/core/`: configuration and shared infrastructure
-- `app/models/`: application models
-- `app/services/`: business logic
-- `tests/`: test suite
-- `pyproject.toml`: project metadata, dependencies, and tool configuration
+### Python with uv
 
-## Direct dependencies
+The project requires Python 3.14 or newer. `just sync` runs `uv sync`, which downloads a compatible Python version if needed and installs the dependencies in `.venv`. If you prefer to install Python through uv first, run `uv python install 3.14` before `just sync`.
 
-Runtime:
+## Development
 
-- `fastapi[standard]`
+| Command | Purpose |
+| --- | --- |
+| `just test` | Run pytest |
+| `just lint` | Check code with Ruff |
+| `just format` | Format code with Ruff |
+| `just typecheck` | Run basedpyright |
+| `just check` | Run lint, type checking, tests, and a formatting check |
 
-Development:
+Dependencies are managed in `pyproject.toml` and locked in `uv.lock`. Add runtime packages with `uv add <package>` or development tools with `uv add --dev <package>`. CI runs formatting, lint, tests, and type checks on pushes and pull requests to `main`.
 
-- `pytest`
-- `httpx`
-- `basedpyright`
-- `ruff`
+## Project layout
 
-Add project-specific packages with `uv add <package>` or `uv add --dev <package>`.
+```text
+app/
+  main.py              FastAPI app, root route, and example API routes
+  templates/index.html Empty HTML page returned at /
+  api/v1/user.py       Placeholder for user routes
+  core/                Placeholders for configuration and logging
+  db/schema.py         Placeholder for database schema
+  models/user.py       Placeholder for user models
+  services/user_service.py  Placeholder for user logic
+tests/                 Example API tests
+justfile               Development commands
+pyproject.toml         Python requirements and dependencies
+pyrightconfig.json    Basedpyright virtual environment settings
+```
