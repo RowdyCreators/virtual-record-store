@@ -15,6 +15,6 @@ def test_get() -> None:
 
 
 def test_post() -> None:
-    response = cast(Response, client.post("/api/greet", params={"name": "Ada"}))  # pyright: ignore[reportUnknownMemberType]
+    response = cast(Response, client.post("/api/greet", params={"name": "Neil"}))  # pyright: ignore[reportUnknownMemberType]
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello, Ada!"}
+    assert response.json() == {"message": "Hello, Neil!"}
