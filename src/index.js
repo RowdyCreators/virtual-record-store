@@ -14,3 +14,26 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   IFrameAPI.createController(element, options, callback);
   
 };
+
+const searchBar = document.getElementById("searchBar");
+const searchElements = document.getElementById('e');
+const searchButton = document.querySelectorAll("searchButton");
+
+function search() {
+  const searchString = searchBar.value;
+  console.log(searchString);
+  if (searchString === "hi") {
+    console.log("success");
+  }
+
+  //searchElements.foreach(e) => {
+
+  console.log("Searched");
+}
+
+searchBar.addEventListener("keydown", (e) => {
+  if (e.code === "Enter") {
+    search();
+  }
+}
+)
