@@ -17,23 +17,41 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
 
 const searchBar = document.getElementById("searchBar");
 const searchElements = document.getElementById('e');
-const searchButton = document.querySelectorAll("searchButton");
+const searchButton = document.getElementById("searchButton");
 
-function search() {
-  const searchString = searchBar.value;
+/**
+ * Gets the string from the searchbar and searches the database using it.
+ * @param {string} searchString - The text to search by. 
+ */
+function search(searchString) {
   console.log(searchString);
   if (searchString === "hi") {
     console.log("success");
+  } else if (searchString.length < 1) {
+    console.log("An <Empty String> was entered");
   }
 
-  //searchElements.foreach(e) => {
+  //searchElements.foreach(e)s => {
 
   console.log("Searched");
 }
 
+/*
 searchBar.addEventListener("keydown", (e) => {
   if (e.code === "Enter") {
-    search();
+    e.preventDefault();
+    const searchString = searchBar.value;
+
+    search(searchString);
+    searchBar.value = "";
   }
-}
-)
+})
+  */
+
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  const searchString = searchBar.value;
+
+  search(searchString.trim());
+  searchBar.value = "";
+})

@@ -1,9 +1,13 @@
 from fastapi import FastAPI, Request
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+BASE_DIR = Path(__file__).resolve().parent
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
-
+app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
 @app.get("/")
 def main(request: Request):
