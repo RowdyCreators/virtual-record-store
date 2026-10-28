@@ -25,6 +25,8 @@ To enable backend catalog access:
 2. Copy `.env.example` to `.env`.
 3. Set `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` using the values in your app settings, then restart the server. Environment variables take precedence over `.env`.
 
+Run `uv run scripts/check_spotify.py` from the project root to check token retrieval and reuse without printing the token. Failures exit with code 1.
+
 The token service uses [Client Credentials](https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow): it authenticates the backend, caches a temporary token, and renews it before expiry. No manual token setup, visitor login, or redirect URI is needed. Search routes are not connected yet.
 
 > [!IMPORTANT]
