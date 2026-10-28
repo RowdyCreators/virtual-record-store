@@ -7,6 +7,9 @@ authors = [
 requires-python = ">=3.14"
 dependencies = [
     "fastapi[standard]>=0.141.1",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
 ]
 
 [tool.fastapi]
@@ -15,7 +18,6 @@ entrypoint = "app.main:app"
 [dependency-groups]
 dev = [
     "basedpyright>=1.40.1",
-    "httpx>=0.28.1",
     "pytest>=9.1.1",
     "ruff>=0.16.8",
 ]
