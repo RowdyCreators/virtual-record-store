@@ -1,10 +1,10 @@
 # Virtual Record Store
 
-A FastAPI starting point for a virtual record store. The repository currently contains a server-rendered root page, two example API routes, and placeholders for models, services, and database code. Record browsing, accounts, and persistence are not implemented yet.
+A virtual record store built with FastAPI, Jinja2, and plain JavaScript. The app has a search input, example API routes, and a server-side Spotify token service. Catalog search, accounts, playback, and persistence are not implemented.
 
 ## Getting started
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [just](https://just.systems/man/en/packages.html).
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [just](https://just.systems/man/en/packages.html). The project requires Python 3.14+; uv installs a compatible version if needed.
 
 ```bash
 git clone https://github.com/RowdyCreators/virtual-record-store.git
@@ -15,37 +15,42 @@ just dev
 
 Open <http://localhost:8000/> to see the current page. FastAPI's interactive API documentation is at <http://localhost:8000/docs>.
 
-For development, run `just dev` or `uv run fastapi dev`. For production, run `just prod` or `uv run fastapi run`.
+The page and mocked tests work without Spotify credentials.
 
-### Python with uv
+## Spotify credentials
 
-The project requires Python 3.14 or newer. `just sync` runs `uv sync`, which downloads a compatible Python version if needed and installs the dependencies in `.venv`. If you prefer to install Python through uv first, run `uv python install 3.14` before `just sync`.
+To enable backend catalog access:
+
+1. Open your app in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard). Development-mode app owners need Spotify Premium.
+2. Copy `.env.example` to `.env`.
+3. Set `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` using the values in your app settings, then restart the server. Environment variables take precedence over `.env`.
+
+Run `uv run scripts/check_spotify.py` from the project root to check token retrieval and reuse without printing the token. Failures exit with code 1.
+
+The token service uses [Client Credentials](https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow): it authenticates the backend, caches a temporary token, and renews it before expiry. No manual token setup, visitor login, or redirect URI is needed. Search routes are not connected yet.
+
+> [!IMPORTANT]
+> `.env` is ignored by Git. Keep credentials and access tokens out of frontend code, logs, and commits.
 
 ## Development
 
 | Command | Purpose |
 | --- | --- |
+| `just dev` | Start the development server with auto-reload |
+| `just prod` | Start the server without auto-reload |
 | `just test` | Run pytest |
 | `just lint` | Check code with Ruff |
 | `just format` | Format code with Ruff |
 | `just typecheck` | Run basedpyright |
 | `just check` | Run lint, type checking, tests, and a formatting check |
 
-Dependencies are managed in `pyproject.toml` and locked in `uv.lock`. Add runtime packages with `uv add <package>` or development tools with `uv add --dev <package>`. CI runs formatting, lint, tests, and type checks on pushes and pull requests to `main`.
+Manage dependencies with `uv add <package>` or `uv add --dev <package>`. CI runs the same checks on pushes and pull requests to `main`. Spotify tests use mocked responses and require no credentials.
 
 ## Project layout
 
-```text
-app/
-  main.py              FastAPI app, root route, and example API routes
-  templates/index.html Empty HTML page returned at /
-  api/v1/user.py       Placeholder for user routes
-  core/                Placeholders for configuration and logging
-  db/schema.py         Placeholder for database schema
-  models/user.py       Placeholder for user models
-  services/user_service.py  Placeholder for user logic
-tests/                 Example API tests
-justfile               Development commands
-pyproject.toml         Python requirements and dependencies
-pyrightconfig.json    Basedpyright virtual environment settings
-```
+- [`app/main.py`](app/main.py): FastAPI app and routes.
+- `app/templates/` and `app/static/`: page templates, JavaScript, and CSS.
+- [`app/core/config.py`](app/core/config.py): environment configuration.
+- [`app/services/spotify_service.py`](app/services/spotify_service.py): token requests and caching.
+- `app/api/`, `app/models/`, and `app/db/`: placeholders for routes, models, and persistence.
+- [`tests/`](tests/): API and token service tests.
