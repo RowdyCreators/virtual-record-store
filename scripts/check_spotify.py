@@ -6,7 +6,10 @@ from pathlib import Path
 # Allow direct execution from scripts/ without installing the app as a package.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app.services.spotify_service import SpotifyTokenError, get_spotify_service  # noqa: E402
+from app.services.spotify_service import (
+    SpotifyTokenError,
+    get_spotify_service,
+)
 
 
 def main() -> int:
