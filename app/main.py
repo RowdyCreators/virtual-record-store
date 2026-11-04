@@ -5,11 +5,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 BASE_DIR = Path(__file__).resolve().parent
+from app.api.v1.search import router as search_router
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
+app.include_router(search_router, prefix="/api")
 
 @app.get("/")
 def main(request: Request):
