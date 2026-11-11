@@ -1,9 +1,9 @@
-# app/api/v1/search.py
+
 from fastapi import APIRouter, HTTPException, Query, status
-from app.services.SpotifyService import SpotifyService
+from app.services.spotify_service import spotify_service
 
 router = APIRouter()
-spotify_service = SpotifyService()
+spotify_service = spotify_service()
 
 @router.get("/search")
 async def search(
