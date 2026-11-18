@@ -3,32 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://open.spotify.com/embed/iframe-api/v1" defer></script>
+    <meta name="color-scheme" content="dark">
+    <title>Virtual Record Store</title>
     <script src="/static/index.js" defer></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
-    <form action="" method="get" id="searchform">
-        <div id="seachbar-form">
-            <input type="search" id="searchBar"></input>
+    <header class="masthead">
+        <p class="eyebrow">Est. 2026 &middot; Open late</p>
+        <h1>Virtual Record Store</h1>
+
+        <!-- <form action="" method="get" id="searchform" role="search">
+            <label class="visually-hidden" for="searchBar">Search records</label>
+            <input type="search" id="searchBar" name="q" placeholder="Search the racks" autocomplete="off" />
+            <button type="submit" id="searchButton">Search</button>
+        </form> -->
+    </header>
+
+    <main class="floor">
+        <section class="crate" id="crate" aria-label="Record rack">
+            <div
+                class="rack"
+                id="rack"
+                tabindex="0"
+                aria-label="Records receding down the aisle. Use the up and down arrow keys to flip through the rack."
+            ></div>
+
+            <div class="rail">
+                <button type="button" class="rail-button" id="prevButton" aria-label="Previous record">&#9650;</button>
+                <p class="rail-count"><span id="counter">1</span><span aria-hidden="true"> / </span><span id="total">3</span></p>
+                <button type="button" class="rail-button" id="nextButton" aria-label="Next record">&#9660;</button>
+            </div>
+        </section>
+
+        <p class="hint">Hover a sleeve to peek &middot; click to open its crate</p>
+    </main>
+
+    <div class="scrim" id="scrim"></div>
+
+    <aside
+        class="panel"
+        id="panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="panelTitle"
+        aria-hidden="true"
+    >
+        <button type="button" class="panel-close" id="panelClose" aria-label="Close crate">&times;</button>
+
+        <div class="panel-head">
+            <div class="panel-art" aria-hidden="true"></div>
+            <div class="panel-heading">
+                <p class="eyebrow" id="panelKicker">Record 01 &middot; Side A</p>
+                <h2 class="panel-title" id="panelTitle"></h2>
+                <p class="panel-meta">
+                    <span id="panelLabel">Spotify</span>
+                    <span aria-hidden="true">&middot;</span>
+                    <span id="panelTracks">5 tracks</span>
+                </p>
+            </div>
         </div>
-        
-        <button id="searchButton">search</button>
-    </form>
-    
-    <div id="embed-iframe">This is a test iframe</div>
-    <div class="episodes">
-    <button class="episode" data-spotify-id="spotify:episode:7makk4oTQel546B0PZlDM5">
-        My Path to Spotify: Women in Engineering
-    </button>
 
-    <button class="episode" data-spotify-id="spotify:episode:43cbJh4ccRD7lzM2730YK3">
-        What is Backstage?
-    </button>
+        <div class="panel-player" id="panelPlayer"></div>
 
-    <button class="episode" data-spotify-id="spotify:episode:6I3ZzCxRhRkNqnQNo8AZPV">
-        Introducing Nerd Out@Spotify
-    </button>
+        <div class="tracklist">
+            <p class="eyebrow">Tracklist</p>
+            <ol class="tracks" id="tracks"></ol>
+            <p class="tracklist-note">Track previews are placeholder rows for now.</p>
+        </div>
+    </aside>
+
+    <div class="episodes" id="episode-source" hidden>
+        <button class="episode" data-spotify-id="spotify:episode:7makk4oTQel546B0PZlDM5" data-label="Spotify">
+            My Path to Spotify: Women in Engineering
+        </button>
+        <button class="episode" data-spotify-id="spotify:episode:43cbJh4ccRD7lzM2730YK3" data-label="Spotify">
+            What is Backstage?
+        </button>
+        <button class="episode" data-spotify-id="spotify:episode:6I3ZzCxRhRkNqnQNo8AZPV" data-label="Spotify">
+            Introducing Nerd Out@Spotify
+        </button>
     </div>
 </body>
 </html>
