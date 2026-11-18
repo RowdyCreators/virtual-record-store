@@ -1,6 +1,9 @@
 # List available recipes
 default:
     @just --list
+# Frontend-only throwaway prototype (no FastAPI or credentials)
+prototype:
+    python3 -m http.server 8010 --bind 127.0.0.1 --directory app
 # Install dependencies
 sync:
     uv sync

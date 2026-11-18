@@ -1,34 +1,24 @@
 <!DOCTYPE html>
+<!-- THROWAWAY FRONTEND PROTOTYPE: three layouts on /?variant=A|B|C. -->
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://open.spotify.com/embed/iframe-api/v1" defer></script>
-    <script src="/static/index.js" defer></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Side B — a virtual record store · prototype</title>
+  <link rel="stylesheet" href="/static/prototype.css">
+  <script src="/static/prototype.js" defer></script>
 </head>
 <body>
-    <form action="" method="get" id="searchform">
-        <div id="seachbar-form">
-            <input type="search" id="searchBar"></input>
-        </div>
-        
-        <button id="searchButton">search</button>
-    </form>
-    
-    <div id="embed-iframe">This is a test iframe</div>
-    <div class="episodes">
-    <button class="episode" data-spotify-id="spotify:episode:7makk4oTQel546B0PZlDM5">
-        My Path to Spotify: Women in Engineering
-    </button>
-
-    <button class="episode" data-spotify-id="spotify:episode:43cbJh4ccRD7lzM2730YK3">
-        What is Backstage?
-    </button>
-
-    <button class="episode" data-spotify-id="spotify:episode:6I3ZzCxRhRkNqnQNo8AZPV">
-        Introducing Nerd Out@Spotify
-    </button>
-    </div>
+  <div id="notice" role="status"></div>
+  <div id="prototype"></div>
+  <aside id="player" class="player" aria-label="Selected record" aria-live="polite" hidden></aside>
+  <details class="debug-state"><summary>Prototype state</summary><pre id="prototype-state"></pre></details>
+  <div class="prototype-toolbar" aria-label="Prototype layout switcher">
+    <button data-cycle="-1" aria-label="Previous layout">←</button>
+    <div><small>THROWAWAY PROTOTYPE</small><span id="variant-label"></span></div>
+    <button data-cycle="1" aria-label="Next layout">→</button>
+  </div>
+  <noscript>This frontend prototype needs JavaScript. No account or Spotify credentials are required.</noscript>
 </body>
 </html>
